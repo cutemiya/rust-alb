@@ -1,0 +1,26 @@
+strategy: WeightedRoundRobin
+global_rate_limit:
+  requests_per_second: 1000
+  burst_size: 1500
+
+backends:
+  backend1:
+    url: "http://localhost:8081"
+    weight: 3
+    rate_limit:
+      requests_per_second: 100
+      burst_size: 150
+
+  backend2:
+    url: "http://localhost:8082"
+    weight: 2
+    rate_limit:
+      requests_per_second: 80
+      burst_size: 120
+
+  backend3:
+    url: "http://localhost:8083"
+    weight: 1
+    rate_limit:
+      requests_per_second: 50
+      burst_size: 75
