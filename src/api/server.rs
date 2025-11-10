@@ -1,8 +1,8 @@
-use std::net::SocketAddr;
-use axum::Router;
-use axum::routing::get;
-use crate::api::handlers::health_check;
+use crate::api::handlers::{handle_request, health_check};
 use crate::app::state::AppState;
+use axum::Router;
+use axum::routing::{any, get};
+use std::net::SocketAddr;
 
 pub struct Server {
     router: Router,
@@ -19,6 +19,8 @@ impl Server {
     fn build_router(state: AppState) -> Router {
         Router::new()
             .route("/health", get(health_check))
+            .route("/proxy", any(handle_request))
+            .route("/proxy/*path", any(handle_request))
             .route("/config", get(Self::get_config))
             .with_state(state)
     }

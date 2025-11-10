@@ -22,6 +22,7 @@ pub struct BalancerConfig {
     pub strategy: LoadBalancingStrategy,
     pub backends: HashMap<String, BackendConfig>,
     pub global_rate_limit: Option<RateLimitConfig>,
+    pub is_debug: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
